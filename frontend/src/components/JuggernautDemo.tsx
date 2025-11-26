@@ -18,8 +18,8 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  Stack,
 } from '@mui/material';
-import Grid from '@mui/material/Grid2';
 import {
   CheckCircle,
   Error,
@@ -239,8 +239,8 @@ const JuggernautDemo: React.FC = () => {
         </Tabs>
 
         <TabPanel value={tabValue} index={0}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }} spacing={3}>
+            <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 45%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
@@ -269,9 +269,9 @@ const JuggernautDemo: React.FC = () => {
                   )}
                 </CardContent>
               </Card>
-            </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
+            <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 45%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
@@ -299,8 +299,8 @@ const JuggernautDemo: React.FC = () => {
                   )}
                 </CardContent>
               </Card>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </TabPanel>
 
         <TabPanel value={tabValue} index={1}>
@@ -412,8 +412,8 @@ const JuggernautDemo: React.FC = () => {
         </TabPanel>
 
         <TabPanel value={tabValue} index={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }} spacing={3}>
+            <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 45%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
@@ -436,9 +436,9 @@ const JuggernautDemo: React.FC = () => {
                   )}
                 </CardContent>
               </Card>
-            </Grid>
+            </Box>
 
-            <Grid item xs={12} md={6}>
+            <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 45%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
@@ -478,8 +478,8 @@ const JuggernautDemo: React.FC = () => {
                   )}
                 </CardContent>
               </Card>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </TabPanel>
 
         <TabPanel value={tabValue} index={4}>
@@ -552,8 +552,8 @@ const JuggernautDemo: React.FC = () => {
         </TabPanel>
 
         <TabPanel value={tabValue} index={5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4}>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }} spacing={3}>
+            <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 30%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" color="primary">
@@ -565,8 +565,8 @@ const JuggernautDemo: React.FC = () => {
                   </Typography>
                 </CardContent>
               </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
+            </Box>
+            <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 30%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" color="success.main">
@@ -578,8 +578,8 @@ const JuggernautDemo: React.FC = () => {
                   </Typography>
                 </CardContent>
               </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
+            </Box>
+            <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 30%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" color="warning.main">
@@ -591,36 +591,36 @@ const JuggernautDemo: React.FC = () => {
                   </Typography>
                 </CardContent>
               </Card>
-            </Grid>
+            </Box>
 
-            <Grid item xs={12}>
+            <Box sx={{ flex: "1 0 100%", p: 1.5 }}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
                     System Performance Metrics
                   </Typography>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ display: "flex", flexWrap: "wrap" }} spacing={2}>
+                    <Box sx={{ flex: { xs: "1 0 100%", sm: "1 0 45%", md: "1 0 22%" }, p: 1 }}>
                       <Typography variant="body2">Average Response Time</Typography>
                       <Typography variant="h6">142ms</Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
+                    </Box>
+                    <Box sx={{ flex: { xs: "1 0 100%", sm: "1 0 45%", md: "1 0 22%" }, p: 1 }}>
                       <Typography variant="body2">Uptime</Typography>
                       <Typography variant="h6">99.98%</Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
+                    </Box>
+                    <Box sx={{ flex: { xs: "1 0 100%", sm: "1 0 45%", md: "1 0 22%" }, p: 1 }}>
                       <Typography variant="body2">Active Computations</Typography>
                       <Typography variant="h6">7</Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
+                    </Box>
+                    <Box sx={{ flex: { xs: "1 0 100%", sm: "1 0 45%", md: "1 0 22%" }, p: 1 }}>
                       <Typography variant="body2">Queue Size</Typography>
                       <Typography variant="h6">3</Typography>
-                    </Grid>
-                  </Grid>
+                    </Box>
+                  </Box>
                 </CardContent>
               </Card>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </TabPanel>
 
         {loading && (
