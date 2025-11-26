@@ -18,7 +18,6 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Stack,
 } from '@mui/material';
 import {
   CheckCircle,
@@ -239,7 +238,7 @@ const JuggernautDemo: React.FC = () => {
         </Tabs>
 
         <TabPanel value={tabValue} index={0}>
-          <Box sx={{ display: "flex", flexWrap: "wrap" }} spacing={3}>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
             <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 45%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
@@ -412,7 +411,7 @@ const JuggernautDemo: React.FC = () => {
         </TabPanel>
 
         <TabPanel value={tabValue} index={3}>
-          <Box sx={{ display: "flex", flexWrap: "wrap" }} spacing={3}>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
             <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 45%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
@@ -552,7 +551,7 @@ const JuggernautDemo: React.FC = () => {
         </TabPanel>
 
         <TabPanel value={tabValue} index={5}>
-          <Box sx={{ display: "flex", flexWrap: "wrap" }} spacing={3}>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
             <Box sx={{ flex: { xs: "1 0 100%", md: "1 0 30%" }, p: 1.5 }}>
               <Card>
                 <CardContent>
@@ -599,7 +598,7 @@ const JuggernautDemo: React.FC = () => {
                   <Typography variant="h6" gutterBottom>
                     System Performance Metrics
                   </Typography>
-                  <Box sx={{ display: "flex", flexWrap: "wrap" }} spacing={2}>
+                  <Box sx={{ display: "flex", flexWrap: "wrap" }}>
                     <Box sx={{ flex: { xs: "1 0 100%", sm: "1 0 45%", md: "1 0 22%" }, p: 1 }}>
                       <Typography variant="body2">Average Response Time</Typography>
                       <Typography variant="h6">142ms</Typography>
