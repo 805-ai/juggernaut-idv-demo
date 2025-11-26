@@ -12,7 +12,6 @@ import {
   TextField,
   Card,
   CardContent,
-  Grid,
   Chip,
   LinearProgress,
   List,
@@ -20,6 +19,7 @@ import {
   ListItemText,
   ListItemIcon,
 } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import {
   CheckCircle,
   Error,
@@ -197,7 +197,7 @@ const JuggernautDemo: React.FC = () => {
     }
   };
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
     setVerificationResults(null);
   };
