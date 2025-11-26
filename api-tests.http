@@ -1,0 +1,199 @@
+### Juggernaut IDV API Test Collection
+### Use with REST Client extension in VS Code or similar tools
+
+@baseUrl = http://localhost:5000/api
+@contentType = application/json
+@authToken = Bearer your-jwt-token-here
+@apiKey = jug_master_key_change_this_in_production
+
+### Health Check - Basic
+GET {{baseUrl}}/health/check
+
+### Health Check - Detailed
+GET {{baseUrl}}/health/detailed
+Authorization: {{authToken}}
+
+### Get Public Key
+GET {{baseUrl}}/keys/public
+
+### Register User
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "demo@juggernaut.ai",
+  "password": "SecureP@ss123",
+  "name": "Demo User"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "demo@juggernaut.ai",
+  "password": "SecureP@ss123"
+}
+
+### Generate API Key
+POST {{baseUrl}}/auth/api-key
+Authorization: {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "Test API Key",
+  "permissions": ["read", "verify"]
+}
+
+### Verify Receipt
+POST {{baseUrl}}/receipts/verify
+X-API-Key: {{apiKey}}
+Content-Type: {{contentType}}
+
+{
+  "receiptData": {
+    "transactionId": "TX-2024-001",
+    "amount": 99.99,
+    "currency": "USD",
+    "merchant": "Acme Corp",
+    "timestamp": "2024-01-15T10:30:00Z"
+  },
+  "metadata": {
+    "source": "POS",
+    "userId": "user-123"
+  }
+}
+
+### Batch Verify Receipts
+POST {{baseUrl}}/receipts/batch-verify
+X-API-Key: {{apiKey}}
+Content-Type: {{contentType}}
+
+{
+  "receipts": [
+    {
+      "receiptData": {
+        "transactionId": "TX-001",
+        "amount": 50.00
+      }
+    },
+    {
+      "receiptData": {
+        "transactionId": "TX-002",
+        "amount": 75.50
+      }
+    }
+  ]
+}
+
+### List Receipts
+GET {{baseUrl}}/receipts?page=1&limit=10&status=verified
+X-API-Key: {{apiKey}}
+
+### Get Receipt Statistics
+GET {{baseUrl}}/receipts/stats
+X-API-Key: {{apiKey}}
+
+### Verify Chain
+POST {{baseUrl}}/chain/verify
+X-API-Key: {{apiKey}}
+Content-Type: {{contentType}}
+
+{
+  "chainData": {
+    "blocks": [
+      {
+        "hash": "0x123abc",
+        "previousHash": "0x000000",
+        "timestamp": 1642345678,
+        "data": {"tx": "sample"},
+        "nonce": 12345
+      }
+    ],
+    "chainId": "testnet-001"
+  }
+}
+
+### Check Chain Integrity
+GET {{baseUrl}}/chain/integrity
+X-API-Key: {{apiKey}}
+
+### Get Chain Statistics
+GET {{baseUrl}}/chain/stats
+X-API-Key: {{apiKey}}
+
+### Trigger Autonomy Recomputation
+POST {{baseUrl}}/autonomy/recompute
+X-API-Key: {{apiKey}}
+Content-Type: {{contentType}}
+
+{
+  "datasetId": "dataset-2024-001",
+  "parameters": {
+    "algorithm": "neural_net",
+    "iterations": 1000,
+    "threshold": 0.95
+  },
+  "options": {
+    "priority": "high",
+    "notifyOnComplete": true
+  }
+}
+
+### Get Computation Status
+GET {{baseUrl}}/autonomy/status/computation-id-here
+X-API-Key: {{apiKey}}
+
+### Get Autonomy Metrics
+GET {{baseUrl}}/autonomy/metrics
+X-API-Key: {{apiKey}}
+
+### Detect Gaming Patterns
+POST {{baseUrl}}/gaming/detect
+X-API-Key: {{apiKey}}
+Content-Type: {{contentType}}
+
+{
+  "data": {
+    "transactions": [
+      {"amount": 99.99, "timestamp": "2024-01-15T10:00:00Z"},
+      {"amount": 99.99, "timestamp": "2024-01-15T10:01:00Z"},
+      {"amount": 99.99, "timestamp": "2024-01-15T10:02:00Z"}
+    ]
+  },
+  "analysisType": "pattern",
+  "threshold": 0.7
+}
+
+### Evaluate Gaming Risk
+POST {{baseUrl}}/gaming/evaluate
+X-API-Key: {{apiKey}}
+Content-Type: {{contentType}}
+
+{
+  "entityId": "entity-001",
+  "timeRange": {
+    "start": "2024-01-01T00:00:00Z",
+    "end": "2024-01-31T23:59:59Z"
+  }
+}
+
+### Get Gaming Patterns
+GET {{baseUrl}}/gaming/patterns?severity=high
+X-API-Key: {{apiKey}}
+
+### Get Gaming Statistics
+GET {{baseUrl}}/gaming/statistics
+X-API-Key: {{apiKey}}
+
+### Verify Signature
+POST {{baseUrl}}/keys/verify-signature
+Content-Type: {{contentType}}
+
+{
+  "message": "Hello, World!",
+  "signature": "base64-signature-here"
+}
+
+### Get JWKS
+GET {{baseUrl}}/keys/jwks
