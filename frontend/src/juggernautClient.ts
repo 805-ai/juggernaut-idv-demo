@@ -84,7 +84,7 @@ class JuggernautClient {
 
     // Request interceptor to add auth headers
     this.api.interceptors.request.use(
-      (config) => {
+      (config: any) => {
         if (this.authToken) {
           config.headers.Authorization = `Bearer ${this.authToken}`;
         } else if (this.apiKey) {
@@ -92,14 +92,14 @@ class JuggernautClient {
         }
         return config;
       },
-      (error) => {
+      (error: any) => {
         return Promise.reject(error);
       }
     );
 
     // Response interceptor for error handling
     this.api.interceptors.response.use(
-      (response) => response,
+      (response: any) => response,
       async (error: AxiosError) => {
         if (error.response?.status === 401) {
           // Handle token refresh or redirect to login

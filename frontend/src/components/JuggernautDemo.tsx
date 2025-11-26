@@ -12,23 +12,13 @@ import {
   TextField,
   Card,
   CardContent,
-  CardActions,
   Grid,
   Chip,
   LinearProgress,
-  IconButton,
-  Tooltip,
-  Divider,
   List,
   ListItem,
   ListItemText,
   ListItemIcon,
-  Switch,
-  FormControlLabel,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
 } from '@mui/material';
 import {
   CheckCircle,
@@ -42,13 +32,8 @@ import {
   SportsEsports,
   VpnKey,
   Refresh,
-  Upload,
-  Download,
   Assessment,
-  Settings,
   PlayArrow,
-  Stop,
-  Delete,
 } from '@mui/icons-material';
 import { toast, Toaster } from 'react-hot-toast';
 import juggernautClient from '../juggernautClient';
@@ -85,7 +70,7 @@ const JuggernautDemo: React.FC = () => {
   const [gamingData, setGamingData] = useState<string>('');
   const [computationId, setComputationId] = useState<string>('');
   const [verificationResults, setVerificationResults] = useState<any>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [_isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     checkHealth();
@@ -114,7 +99,7 @@ const JuggernautDemo: React.FC = () => {
     try {
       setLoading(true);
       const response = await juggernautClient.getPublicKey();
-      setPublicKey(response.publicKey || '');
+      setPublicKey((response.data as any)?.publicKey || '');
       toast.success('Public key retrieved');
     } catch (error) {
       toast.error('Failed to get public key');
@@ -129,7 +114,7 @@ const JuggernautDemo: React.FC = () => {
       setLoading(true);
       const data = JSON.parse(receiptData || '{}');
       const response = await juggernautClient.verifyReceipt(data);
-      setVerificationResults(response.verification);
+      setVerificationResults((response.data as any)?.verification || response.data);
       toast.success('Receipt verified successfully');
     } catch (error) {
       toast.error('Receipt verification failed');
@@ -144,7 +129,7 @@ const JuggernautDemo: React.FC = () => {
       setLoading(true);
       const data = JSON.parse(chainData || '{}');
       const response = await juggernautClient.verifyChain(data);
-      setVerificationResults(response.verification);
+      setVerificationResults((response.data as any)?.verification || response.data);
       toast.success('Chain verified successfully');
     } catch (error) {
       toast.error('Chain verification failed');
@@ -159,9 +144,10 @@ const JuggernautDemo: React.FC = () => {
       setLoading(true);
       const data = JSON.parse(gamingData || '{}');
       const response = await juggernautClient.detectGaming(data);
-      setVerificationResults(response.detection);
+      const detection = (response.data as any)?.detection || response.data;
+      setVerificationResults(detection);
 
-      if (response.detection?.gamingDetected) {
+      if (detection?.gamingDetected) {
         toast.error('Gaming pattern detected!');
       } else {
         toast.success('No gaming patterns detected');
@@ -181,7 +167,8 @@ const JuggernautDemo: React.FC = () => {
         iterations: 100,
         threshold: 0.95,
       });
-      setComputationId(response.computation?.id || '');
+      const computation = (response.data as any)?.computation || response.data;
+      setComputationId(computation?.id || '');
       toast.success('Recomputation initiated');
     } catch (error) {
       toast.error('Failed to trigger recomputation');
@@ -200,8 +187,8 @@ const JuggernautDemo: React.FC = () => {
     try {
       setLoading(true);
       const response = await juggernautClient.getComputationStatus(computationId);
-      setVerificationResults(response);
-      toast.success(`Computation status: ${response.status}`);
+      setVerificationResults(response.data);
+      toast.success(`Computation status: ${(response.data as any)?.status || 'unknown'}`);
     } catch (error) {
       toast.error('Failed to get computation status');
       console.error(error);
@@ -329,7 +316,7 @@ const JuggernautDemo: React.FC = () => {
                 multiline
                 rows={6}
                 value={receiptData}
-                onChange={(e) => setReceiptData(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReceiptData(e.target.value)}
                 fullWidth
                 margin="normal"
                 label="Receipt Data (JSON)"
@@ -382,7 +369,7 @@ const JuggernautDemo: React.FC = () => {
                 multiline
                 rows={6}
                 value={chainData}
-                onChange={(e) => setChainData(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChainData(e.target.value)}
                 fullWidth
                 margin="normal"
                 label="Chain Data (JSON)"
@@ -508,7 +495,7 @@ const JuggernautDemo: React.FC = () => {
                 multiline
                 rows={6}
                 value={gamingData}
-                onChange={(e) => setGamingData(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGamingData(e.target.value)}
                 fullWidth
                 margin="normal"
                 label="Data to Analyze (JSON)"
